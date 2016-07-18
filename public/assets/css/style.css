@@ -1,0 +1,49 @@
+/*  Re-org colors  */
+/* #003760 = Dark Blue*/
+/* #3679ac = Light Blue - Legacy*/
+/* #367AAD = Light blue */
+/* #e09317 = Orange */
+/* #e7e6dd = Biege */
+/* #d08307 = dark Orange  */
+
+/* ====== Bootstrap and Custom Theme overrides ====== */
+.navbar{
+	border: 0px;
+}
+.navbar-fixed-top {
+	background-color: #003760;
+}
+.navbar-inverse .navbar-nav>li>a{
+	color: #ffffff
+}
+.navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>.active>a:hover{
+	background-color: #e09317;
+}
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus{    
+	background-color: #367AAD;
+}
+.navbar-inverse .navbar-toggle {
+    border-color: transparent;
+}
+.navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover {
+    background-color: #367AAD;
+}
+
+/* //==== Bootstrap and Custom Theme overrides ====== */
+
+
+/* ====== Application Custom CSS ====== */
+
+body{
+	font-family: "Raleway","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.page-header{
+	color: #003760;
+}
+
+.views-content{
+	margin-top: 40px;
+}
+
+/* //==== Application Custom CSS ====== */
