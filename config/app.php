@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://rrtestcase.herokuapp.com'),
+    'url' => env('APP_URL', 'http://localhost'),
 
     /*
     |--------------------------------------------------------------------------
@@ -91,7 +91,7 @@ return [
     |
     */
 
-    'key' => "xlhF31NeOlibJcoOW9tvZg7TkHcAZI3a",
+    'key' => env('APP_KEY'),
 
     'cipher' => 'AES-256-CBC',
 

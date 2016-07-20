@@ -19,7 +19,7 @@
             <div class="form-group">
                 <label for="search-term">Search by physician or hospital name:</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" name="search-term" id="search-term" placeholder="Ex.: 'Mount Sinai' or 'John Smith'">
+                    <input type="text" class="form-control" autocomplete="off" name="search-term" id="search-term" placeholder="Ex.: 'Mount Sinai' or 'John Smith'">
                     <span class="input-group-btn">
                         <button type="submit" class="btn btn-primary">
                             <i class="fa fa-search" aria-hidden="true"></i>
@@ -33,7 +33,7 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row hide">
     <div class="col-md-12">
         <div class="panel panel-default search-results">
             <!-- Default panel contents -->
@@ -54,4 +54,10 @@
 
     </div>
 </div>
+@endsection
+
+@section("page_specific_js")
+    @parent
+    <script src="{{ URL::asset('assets/js/vendor/bootstrap-typeahead.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/js/search-tool.js') }}"></script>
 @endsection

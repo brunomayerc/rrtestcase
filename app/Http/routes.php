@@ -17,4 +17,5 @@ Route::any('/search', "ViewsController@search")->name('search');
 Route::any('/api/importdocs', "Api\ImportToolController@doctors")->name("api-import-doctors");
 Route::any('/api/importprov', "Api\ImportToolController@providers")->name("api-import-providers");
 
+Route::any('/api/typeahead', "Api\TypeAheadController@index")->name("api-typeahead");
 /* //=================== API Routes ===================== */

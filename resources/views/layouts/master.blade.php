@@ -56,9 +56,6 @@
         <!-- Loader for Bootstrap -->
         <script src="{{ URL::asset('assets/js/vendor/loader.js') }}"></script>
 
-        <!-- Global Application JavaScript -->
-        <script src="{{ URL::asset('assets/js/app.js') }}"></script>
-
         <!-- Includes any Page Specific scripts -->
         @yield("page_specific_js")
 

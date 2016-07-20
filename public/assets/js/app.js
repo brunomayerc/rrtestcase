@@ -1,5 +1,0 @@
-/* 
- * Global Js File
- */
-
-
