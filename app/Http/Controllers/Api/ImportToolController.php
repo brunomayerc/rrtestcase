@@ -35,7 +35,7 @@ class ImportToolController extends Controller {
             $new_doctor = new Recipient();
             $new_doctor->openpaymentsdata_reference_id = $doctor->physician_profile_id;
             $new_doctor->name = mb_convert_case(trim($doctor->physician_first_name . " " . $doctor->physician_last_name), MB_CASE_TITLE, "UTF-8");
-            $new_doctor->type = "HOSPITAL";
+            $new_doctor->type = "PROVIDER";
             $new_doctor->total_number_of_transactions = $doctor->transactions;
 
             // Saves the doctor to the local DB
@@ -59,7 +59,7 @@ class ImportToolController extends Controller {
             $new_provider = new Recipient();
             $new_provider->openpaymentsdata_reference_id = $provider->teaching_hospital_id;
             $new_provider->name = mb_convert_case(trim($provider->teaching_hospital_name), MB_CASE_TITLE, "UTF-8");
-            $new_provider->type = "PROVIDER";
+            $new_provider->type = "HOSPITAL";
             $new_provider->total_number_of_transactions = $provider->transactions;
 
             // Saves the provider to the local DB

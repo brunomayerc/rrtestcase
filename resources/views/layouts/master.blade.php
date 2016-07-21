@@ -14,10 +14,13 @@
         <link rel="icon" href="favicon.png" type="image/png">
 
         <!-- Bootstrap Core CSS -->
-        <link href="{{ URL::asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ URL::asset('assets/css/vendor/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
 
         <!-- Font-Awesome Core CSS -->
-        <link href="{{ URL::asset('assets/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ URL::asset('assets/css/vendor/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+
+        <!-- Data-Tables Core CSS -->
+        <link href="{{ URL::asset('assets/css/vendor/dataTables.bootstrap.min.css') }}" rel="stylesheet" type="text/css">
 
         <!-- Application Custom CSS -->
         <link href="{{ URL::asset('assets/css/style.css') }}" rel="stylesheet" type="text/css">

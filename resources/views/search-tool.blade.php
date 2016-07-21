@@ -5,9 +5,9 @@
 <div class="row">
     <div class="page-header">
         <h2>
-            Payment Search
+            Payment Search<br/>
             <small>
-                research your physician's financial relationships with health care companies
+                Research physician's financial relationships with health care companies.
             </small>
         </h2>
     </div>
@@ -19,9 +19,9 @@
             <div class="form-group">
                 <label for="search-term">Search by physician or hospital name:</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" autocomplete="off" name="search-term" id="search-term" placeholder="Ex.: 'Mount Sinai' or 'John Smith'">
+                    <input type="text" class="form-control" autocomplete="off" name="txt-search-term" id="txt-search-term" placeholder="Ex.: 'Mount Sinai' or 'John Smith'">
                     <span class="input-group-btn">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="button" class="btn btn-primary" id="btn-search">
                             <i class="fa fa-search" aria-hidden="true"></i>
                             Search
                         </button>
@@ -33,31 +33,50 @@
     </div>
 </div>
 
-<div class="row hide">
+<div class="row ">
     <div class="col-md-12">
-        <div class="panel panel-default search-results">
+        <div class="panel panel-primary search-results">
             <!-- Default panel contents -->
-            <div class="panel-heading">Search Results</div>
+            <div class="panel-heading">
+                Search Results: 
+            </div>
 
             <!-- List group -->
-            <ul class="list-group">
-                <li class="list-group-item">John Smith</li>
-                <li class="list-group-item">Mount Sinai</li>
-            </ul>
+            <div class="list-group" id="search_results">
+                <div href="#" class="list-group-item" >
+                    <i class="fa fa-hospital-o fa-2x" aria-hidden="true"></i>
+                    <span class="recipient_name">Bruno Couras</span>
+                    <button type="button" class="btn btn-info btn-xs pull-right">
+                        Transactions
+                    </button>
+                    <div class="recipient-transactions">
+                        <br/>
+                        @include("transactions")
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-
-<div class="row">
-    <div class="col-md-12">
-
+{{-- Template for result search row --}}
+<div id="result_row_template" class="hide">
+    <div href="#" class="list-group-item" >
+        <i class="fa fa-2x" aria-hidden="true"></i>
+        <span class="recipient_name">Bruno Couras</span>
+        <button type="button" class="btn btn-info btn-xs pull-right">
+            Transactions
+        </button>
+        <div class="recipient-transactions"></div>
     </div>
 </div>
+
 @endsection
 
 @section("page_specific_js")
-    @parent
-    <script src="{{ URL::asset('assets/js/vendor/bootstrap-typeahead.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/js/search-tool.js') }}"></script>
+@parent
+<script src="{{ URL::asset('assets/js/vendor/bootstrap-typeahead.min.js') }}"></script>
+<script src="{{ URL::asset('assets/js/vendor/jquery.dataTables.min.js') }}"></script>
+<script src="{{ URL::asset('assets/js/vendor/dataTables.bootstrap.min.js') }}"></script>
+<script src="{{ URL::asset('assets/js/search-tool.js') }}"></script>
 @endsection
