@@ -18,16 +18,13 @@ class ImportToolController extends Controller {
      * Performs the import
      */
     public function index() {
-        return response()->json(['success' => 'true', 'message' => 'Data Successfully Imported.']);
-    }
 
-    public function doctors() {
 
-        // Uses the OpenPaymentsData to import the doctrs
+        // Removes all legacy data from table
+        Recipient::getQuery()->delete();
+
+        // Uses the OpenPaymentsData helper to import the doctrs
         $doctors = OpenPaymentsData::importDoctors();
-
-        // Remove any existing docotrs from the table
-        Recipient::deleteDoctors();
 
         // Loop trough the doctors returned and savae them to the local DB
         foreach ($doctors as $doctor) {
@@ -42,16 +39,8 @@ class ImportToolController extends Controller {
             $new_doctor->save();
         }
 
-        return response()->json(['success' => 'true', 'message' => 'Doctors Successfully Imported.']);
-    }
-
-    public function providers() {
-
-        // Uses the OpenPaymentsData to import the providers
+        // Uses the OpenPaymentsData helper to import the providers
         $providers = OpenPaymentsData::importHealthProviders();
-
-        // Remove any existing providers from the table
-        Recipient::deleteProviders();
 
         // Loop trough the providers returned and savae them to the local DB
         foreach ($providers as $provider) {
@@ -66,7 +55,7 @@ class ImportToolController extends Controller {
             $new_provider->save();
         }
 
-        return response()->json(['success' => 'true', 'message' => 'Providers Successfully Imported.']);
+        return response()->json(['success' => 'true', 'message' => 'Data Successfully Imported.']);
     }
 
 }

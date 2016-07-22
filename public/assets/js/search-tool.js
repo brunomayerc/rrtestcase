@@ -63,10 +63,13 @@ function performSearch(searchTerm) {
                         template.find("i").addClass("fa-user-md");
                     }
 
-                    // Binds the view transactions to the element
-                    template.find("button").click(function () {
-                        viewTransactions(response[recipient].openpaymentsdata_reference_id, response[recipient].type);
-                    });
+                    // Binds the click event to the transactions button
+                    template.find("button").
+                            attr("data-openpaymentsdata_reference_id", response[recipient].openpaymentsdata_reference_id).
+                            attr("data-type", response[recipient].type).
+                            click(function () {
+                                viewTransactions($(this).attr("data-openpaymentsdata_reference_id"), $(this).attr("data-type"));
+                            });
 
                     // Adds the template to the view
                     $("#search_results").append(template);
@@ -88,6 +91,9 @@ function viewTransactions(recipient_id, type) {
     // Shows the loading
     recipient_row.find("button").button('loading');
 
+    // Closes other transactions that are oppen
+    $("div.recipient-transactions").slideUp("fast");
+
     // Loads the transactions based on the recipient id
     $.ajax({
         type: "POST",
@@ -98,7 +104,7 @@ function viewTransactions(recipient_id, type) {
         },
         data: {
             recipient_id: recipient_id,
-            type: type
+            recipient_type: type
         },
         async: true,
         error: function (jqXHR, textStatus, errorThrown) {
@@ -114,7 +120,7 @@ function viewTransactions(recipient_id, type) {
             recipient_row.find("table").DataTable();
 
             // Renders the chart
-            renderChart();
+            renderChart(recipient_id, type);
 
             // Resets the transaction button to its normal state
             recipient_row.find("button").button('reset');
@@ -127,29 +133,34 @@ function viewTransactions(recipient_id, type) {
 
 }
 
-function renderChart() {
-    var chart = new CanvasJS.Chart("chartContainer",
+function renderChart(recipient_id, recipient_type) {
+
+    // Formats the chart data before rendering the chart
+    var chartData = JSON.parse($("#charts_data_" + recipient_id).val());
+    var dataPoints = [];
+    for (var name in chartData) {
+        dataPoints.push({
+            y: Math.round(chartData[name]),
+            amount: parseFloat(chartData[name]),
+            name: name
+        });
+    }
+
+    var chart = new CanvasJS.Chart("chart_container_" + recipient_id,
             {
                 theme: "theme2",
                 title: {
-                    text: "Money Received in 2015"
+                    text: "Breakdown by Provider Name"
                 },
                 data: [
                     {
                         type: "pie",
+                        startAngle: 0,
+                        toolTipContent: "{name}: ${amount}",
                         showInLegend: true,
-                        toolTipContent: "{y} - #percent %",
-                        yValueFormatString: "#0.#,,. Million",
-                        legendText: "{indexLabel}",
-                        dataPoints: [
-                            {y: 4181563, indexLabel: "PlayStation 3"},
-                            {y: 2175498, indexLabel: "Wii"},
-                            {y: 3125844, indexLabel: "Xbox 360"},
-                            {y: 1176121, indexLabel: "Nintendo DS"},
-                            {y: 1727161, indexLabel: "PSP"},
-                            {y: 4303364, indexLabel: "Nintendo 3DS"},
-                            {y: 1717786, indexLabel: "PS Vita"}
-                        ]
+                        indexLabel: "#percent%",
+                        percentFormatString: "#0",
+                        dataPoints: dataPoints
                     }
                 ]
             });

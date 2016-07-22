@@ -1,118 +1,53 @@
 <div class="panel with-nav-tabs panel-default">
     <div class="panel-heading">
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#tab_transactions" data-toggle="tab">Transactions</a></li>
-            <li><a href="#tab_charts" data-toggle="tab">Charts</a></li>
+            <li class="active"><a href="#tab_transactions_<?= $recipient_id ?>" data-toggle="tab">Transactions</a></li>
+            <li><a href="#tab_charts_<?= $recipient_id ?>" data-toggle="tab">Visual Breakdown</a></li>
         </ul>
     </div>
     <div class="panel-body">
         <div class="tab-content">
-            <div class="tab-pane fade in active" id="tab_transactions">
-                <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
-                        </tr>
-                        <tr>
-                            <td>Garrett Winters</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>63</td>
-                            <td>2011/07/25</td>
-                            <td>$170,750</td>
-                        </tr>
-                        <tr>
-                            <td>Ashton Cox</td>
-                            <td>Junior Technical Author</td>
-                            <td>San Francisco</td>
-                            <td>66</td>
-                            <td>2009/01/12</td>
-                            <td>$86,000</td>
-                        </tr>
-                        <tr>
-                            <td>Cedric Kelly</td>
-                            <td>Senior Javascript Developer</td>
-                            <td>Edinburgh</td>
-                            <td>22</td>
-                            <td>2012/03/29</td>
-                            <td>$433,060</td>
-                        </tr>
-                        <tr>
-                            <td>Airi Satou</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>33</td>
-                            <td>2008/11/28</td>
-                            <td>$162,700</td>
-                        </tr>
-                        <tr>
-                            <td>Brielle Williamson</td>
-                            <td>Integration Specialist</td>
-                            <td>New York</td>
-                            <td>61</td>
-                            <td>2012/12/02</td>
-                            <td>$372,000</td>
-                        </tr>
-                        <tr>
-                            <td>Herrod Chandler</td>
-                            <td>Sales Assistant</td>
-                            <td>San Francisco</td>
-                            <td>59</td>
-                            <td>2012/08/06</td>
-                            <td>$137,500</td>
-                        </tr>
-                        <tr>
-                            <td>Rhona Davidson</td>
-                            <td>Integration Specialist</td>
-                            <td>Tokyo</td>
-                            <td>55</td>
-                            <td>2010/10/14</td>
-                            <td>$327,900</td>
-                        </tr>
-                        <tr>
-                            <td>Colleen Hurst</td>
-                            <td>Javascript Developer</td>
-                            <td>San Francisco</td>
-                            <td>39</td>
-                            <td>2009/09/15</td>
-                            <td>$205,500</td>
-                        </tr>
-                        <tr>
-                            <td>Sonya Frost</td>
-                            <td>Software Engineer</td>
-                            <td>Edinburgh</td>
-                            <td>23</td>
-                            <td>2008/12/13</td>
-                            <td>$103,600</td>
-                        </tr>
-                        <tr>
-                            <td>Jena Gaines</td>
-                            <td>Office Manager</td>
-                            <td>London</td>
-                            <td>30</td>
-                            <td>2008/12/19</td>
-                            <td>$90,560</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="tab-pane fade in active" id="tab_transactions_<?= $recipient_id ?>">
+                <div class="table-responsive">
+                    <table id="transactions_table_<?= $recipient_id ?>" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Nature of Payment</th>
+                                <?php if ($recipient_type == \App\Models\Recipient::HOSPITAL): ?>
+                                    <th>Paid To</th>
+                                <?php else: ?>
+                                    <th>Paid By</th>
+                                <?php endif; ?>
+                                <th>Date</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php ?>
+                            <?php foreach ($transactions as $transaction): ?>
+                                <?php if ($recipient_type == \App\Models\Recipient::HOSPITAL): ?>
+                                    <tr>
+                                        <td><?= $transaction->nature_of_payment_or_transfer_of_value . ((property_exists($transaction, "contextual_information")) ? " ({$transaction->contextual_information})" : "") ?></td>
+                                        <td><?= $transaction->applicable_manufacturer_or_applicable_gpo_making_payment_name ?></td>
+                                        <td><?= date('m/d/y', strtotime($transaction->date_of_payment)) ?></td>
+                                        <td><?= money_format('$%.2n', $transaction->total_amount_of_payment_usdollars) ?></td>
+                                    </tr>
+                                <?php else: ?>
+                                    <tr>
+                                        <td><?= $transaction->nature_of_payment_or_transfer_of_value ?></td>
+                                        <td><?= $transaction->applicable_manufacturer_or_applicable_gpo_making_payment_name ?></td>
+                                        <td><?= date('m/d/y', strtotime($transaction->date_of_payment)) ?></td>
+                                        <td><?= money_format('$%.2n', $transaction->total_amount_of_payment_usdollars) ?></td>
+                                    </tr>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="tab-pane fade" id="tab_charts">
-                <div id="chartContainer" style="height: 400px; width: 100%;"></div>
+            <div class="tab-pane fade" id="tab_charts_<?= $recipient_id ?>">
+                <input type="hidden"id="charts_data_<?= $recipient_id ?>" value='<?= $chartData; ?>'>
+                <div id="chart_container_<?= $recipient_id ?>" style="height: 400px; width: 100%;"></div>
             </div>
         </div>
     </div>

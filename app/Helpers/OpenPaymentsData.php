@@ -2,6 +2,8 @@
 
 namespace App\Helpers;
 
+use App\Models\Recipient;
+
 /**
  *
  * Custom helper class with some useful generic functions
@@ -16,7 +18,7 @@ class OpenPaymentsData {
     // Limit records per API request
     CONST LIMIT_PER_REQUEST = "5000";
 
-    public static function importData($type, $columns, $group_by) {
+    public static function connectAndRetrieve($type, $recipient_id = false, $columns = false, $group_by = false) {
 
         // Basic import options
         $importOptions = array(
@@ -28,12 +30,25 @@ class OpenPaymentsData {
         // Adds the type of users being imported
         $importOptions["covered_recipient_type"] = $type;
 
+        // Adds the recipient id based on the type
+        if ($recipient_id) {
+            if ($type == "Covered Recipient Physician") {
+                $importOptions["physician_profile_id"] = $recipient_id;
+            } else {
+                $importOptions["teaching_hospital_id"] = $recipient_id;
+            }
+        }
+
         // Adds the columns being imported
-        $importOptions["\$select"] = $columns;
+        if ($columns) {
+            $importOptions["\$select"] = $columns;
+        }
 
         // Adds the group by criteria
-        $importOptions["\$group"] = $group_by;
-
+        if ($group_by) {
+            $importOptions["\$group"] = $group_by;
+        }
+        
         // Connects to the OpenPaymentsData API End point and retrieves the data based on the criteria
         $response = \Curl::to(OpenPaymentsData::API_ENDPOINT)->withData($importOptions)->get();
 
@@ -43,26 +58,31 @@ class OpenPaymentsData {
 
     public static function importDoctors() {
 
-        $type = "Covered Recipient Physician";
+        $type = Recipient::PROVIDER;
         $columns = "physician_profile_id, physician_first_name,physician_last_name, count(*) as transactions";
         $group_by = "physician_profile_id, physician_first_name,physician_last_name";
 
-        $doctors = OpenPaymentsData::importData($type, $columns, $group_by);
-        
+        $doctors = OpenPaymentsData::connectAndRetrieve($type, false, $columns, $group_by);
+
         return $doctors;
-        
     }
 
     public static function importHealthProviders() {
 
-        $type = "Covered Recipient Teaching Hospital";
+        $type = Recipient::HOSPITAL;
         $columns = "teaching_hospital_id, teaching_hospital_name, count(*) as transactions";
         $group_by = "teaching_hospital_id, teaching_hospital_name";
 
-        $providers = OpenPaymentsData::importData($type, $columns, $group_by);
-        
+        $providers = OpenPaymentsData::connectAndRetrieve($type, false, $columns, $group_by);
+
         return $providers;
-        
+    }
+
+    public static function retrieveTransactions($recipient_type, $recipient_id) {
+
+        $transactions = OpenPaymentsData::connectAndRetrieve(constant("App\Models\Recipient::$recipient_type"), $recipient_id);
+
+        return $transactions;
     }
 
 }

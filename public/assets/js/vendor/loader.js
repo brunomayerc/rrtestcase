@@ -52,8 +52,13 @@ var waitingDialog = waitingDialog || (function ($) {
 
             if (settings.progressType) {
                 $dialog.find('.progress-bar').addClass('progress-bar-' + settings.progressType);
+                if (settings.progressType == "success" || settings.progressType == "danger") {
+                    $dialog.find(".progress").attr('class', 'progress');
+                } else {
+                    $dialog.find(".progress").attr('class', 'progress progress-striped active');
+                }
             }
-            $dialog.find('h3').text(message);
+            $dialog.find('h3').html(message);
             // Adding callbacks
             if (typeof settings.onHide === 'function') {
                 $dialog.off('hidden.bs.modal').on('hidden.bs.modal', function (e) {
