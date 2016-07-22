@@ -51,7 +51,7 @@
         <h3>3. How to use it:</h3>
         <ul>
             <li>
-                <b>1. </b>Use the Import Data Tool to connect to the <b>openpaymentsdata</b> and import Doctor/Hospital names and unique identifiers.
+                <b>1. </b>Use the <a href="#" data-toggle="modal" data-target="#sync-tool-modal">Import Data Tool</a> to connect to the <b>openpaymentsdata</b> and import Doctor/Hospital names and unique identifiers.
                 <br/>
                 P.s. There is a setting in the App\Helpers\OpenPaymentsData where you can change the number of Doctor/Hospital that will be imported from the <b>openpaymentsdata</b> database.
             </li>
