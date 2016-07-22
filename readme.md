@@ -55,7 +55,7 @@ DB_PASSWORD=root
 
 #### App Url
 
-Edit file in the root of the project `.env`.
+Edit file in the root of the project `.env`. Please **do not** include the last forward slash `/`
 
 ```sh
 APP_URL=http://localhost
@@ -68,6 +68,22 @@ This project uses [Migrations](https://laravel.com/docs/5.2/migrations) to set u
 ```sh
 php artisan migrate 
 ```
+
+If Migrations fails for any reason, here is the script that can be used to set up the table manually
+
+```sql
+CREATE TABLE `openpaymentsdata_recipient` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `openpaymentsdata_reference_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `type` enum('PROVIDER','HOSPITAL') COLLATE utf8_unicode_ci NOT NULL,
+  `total_number_of_transactions` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+```
+
 
 ### 4. You're all set
 

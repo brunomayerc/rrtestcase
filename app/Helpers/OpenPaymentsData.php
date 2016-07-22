@@ -27,10 +27,12 @@ class OpenPaymentsData {
 
     /**
      * Limit records per API request.
+     * 
+     * The larger the number of records, the longer the import tool is gonna take
      *
      * @var string
      */
-    CONST LIMIT_PER_REQUEST = "10000";
+    CONST LIMIT_PER_REQUEST = "500";
 
     /**
      * Connect to OpenPaymentsData.
