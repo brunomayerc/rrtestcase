@@ -14,13 +14,13 @@
 
 ### 1. Download the project source code
 
-* #### Using [Git](https://git-scm.com/)
+#### Using [Git](https://git-scm.com/)
 
 Run the following command in your servers root web directiory:
 ```sh
 git clone https://github.com/brunomayerc/rrtestcase.git
 ```
-* ### Manual Download
+#### Manual Download
 
 Manually download the [Zip folder](https://github.com/brunomayerc/rrtestcase/archive/master.zip) with the latest version from this repository and place it in your servers root web folder.
 
@@ -40,7 +40,7 @@ This will download and configure any dependency for the project.
 A few configurations must be made in order to deplow the projects database as well as local environment configuration
 
 
-* ### Database
+#### Database
 
 Edit file in the root of the project `.env`.
 
@@ -53,7 +53,7 @@ DB_USERNAME=root
 DB_PASSWORD=root
 ```
 
-* ### App Url
+#### App Url
 
 Edit file in the root of the project `.env`.
 
