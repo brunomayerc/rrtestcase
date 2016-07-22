@@ -5,6 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
+/*
+ * Represents a Recipient from the OpenPaymentsData database
+ * 
+ * For full field list and documentation visit https://dev.socrata.com/foundry/openpaymentsdata.cms.gov/tf25-5jad
+ * 
+ */
 class Recipient extends Model {
 
     /**

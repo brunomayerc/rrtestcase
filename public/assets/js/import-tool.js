@@ -20,7 +20,7 @@ $(document).ready(function () {
 function importData() {
 
     // Import doctors first
-    waitingDialog.show('Importing Data from OpenPaymentsData...<br/>Please wait.', {progressType: 'info', progress: "100%"});
+    waitingDialog.show('Importing Data from OpenPaymentsData.<br/>Please wait...', {progressType: 'info', progress: "100%"});
 
     $.ajax({
         type: "POST",
@@ -28,7 +28,7 @@ function importData() {
         {
             request.setRequestHeader("X-CSRF-Token", $("#_token").val());
         },
-        url: "/api/import",
+        url: app_url + "/api/import",
         data: {},
         async: true,
         error: function (jqXHR, textStatus, errorThrown) {

@@ -30,7 +30,7 @@ class OpenPaymentsData {
      *
      * @var string
      */
-    CONST LIMIT_PER_REQUEST = "5000";
+    CONST LIMIT_PER_REQUEST = "10000";
 
     /**
      * Connect to OpenPaymentsData.

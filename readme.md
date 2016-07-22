@@ -1,27 +1,74 @@
-# Laravel PHP Framework
+# RR Test Case Project
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+## Requirements
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+* PHP >= 5.5.9
+* OpenSSL PHP Extension
+* PDO PHP Extension
+* Mbstring PHP Extension
+* Tokenizer PHP Extension
+* MySQL 5.6
 
-## Official Documentation
+## Instalation
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+### 1. Download the project source code
 
-## Contributing
+* #### Using [Git](https://git-scm.com/)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+Run the following command in your servers root web directiory:
+```sh
+git clone https://github.com/brunomayerc/rrtestcase.git
+```
+* ### Manual Download
 
-## Security Vulnerabilities
+Manually download the [Zip folder](https://github.com/brunomayerc/rrtestcase/archive/master.zip) with the latest version from this repository and place it in your servers root web folder.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+### 2. Composer
 
-## License
+In order to deploy this project, you must install [Composer](https://git-scm.com/). Composer is a Dependency Manager for PHP and its used to install all dependencies for this project.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+Once you have installed Composer. Go to the root directory of this project and run the following command:
+```sh
+php composer.phar update 
+```
+
+This will download and configure any dependency for the project.
+
+### 2. Configure the project
+
+A few configurations must be made in order to deplow the projects database as well as local environment configuration
+
+
+* ### Database
+
+Edit file in the root of the project `.env`.
+
+```sh
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=8889
+DB_DATABASE=reorg
+DB_USERNAME=root
+DB_PASSWORD=root
+```
+
+* ### App Url
+
+Edit file in the root of the project `.env`.
+
+```sh
+APP_URL=http://localhost
+```
+
+### 3. Database Migrations
+
+This project uses [Migrations](https://laravel.com/docs/5.2/migrations) to set up the MySQL Database Structure. Simply run the following command and the database scripts for the application will be deployed:
+
+```sh
+php artisan migrate 
+```
+
+### 4. You're all set
+
+Now, just open your browser and go to the URL you set up in the `.env` file and you should see the project's home page.

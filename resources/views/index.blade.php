@@ -1,5 +1,14 @@
 @extends("layouts.master")
 
 @section("view-content")
-aaa
+<div class="row">
+    <div class="page-header">
+        <h2>
+            Reorg Reseach Test Case<br/>
+            <small>
+                
+            </small>
+        </h2>
+    </div>
+</div>
 @endsection

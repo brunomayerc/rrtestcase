@@ -7,7 +7,7 @@ $(document).ready(function () {
     // Binds the API call to the import data button
     $('#txt-search-term').typeahead({
         ajax: {
-            url: '/api/search/typeahead'
+            url: app_url + '/api/search/typeahead'
         },
         onSelect: function (item) {
             // This is called when the user clicks on a type ahead item
@@ -31,7 +31,7 @@ function performSearch(searchTerm) {
 
     $.ajax({
         type: "POST",
-        url: "/api/search",
+        url: app_url + "/api/search",
         beforeSend: function (request)
         {
             request.setRequestHeader("X-CSRF-Token", $("#_token").val());
@@ -104,7 +104,7 @@ function viewTransactions(recipient_id, type) {
     // Loads the transactions based on the recipient id
     $.ajax({
         type: "POST",
-        url: "transactions",
+        url: app_url + "/transactions",
         beforeSend: function (request)
         {
             request.setRequestHeader("X-CSRF-Token", $("#_token").val());

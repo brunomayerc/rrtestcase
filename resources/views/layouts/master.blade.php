@@ -61,7 +61,9 @@
 
         <!-- Includes any Page Specific scripts -->
         @yield("page_specific_js")
-
+        
+        <!-- JavaScript variable that helps with API Calls -->
+        <script>var app_url = '<?= env("APP_URL")?>'</script>
     </body>
 
 </html>
