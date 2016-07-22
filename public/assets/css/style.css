@@ -66,4 +66,9 @@ button.btn-link{
     padding-right: 0px;
 }
 
+div.recipient-transactions{
+    display: none;
+    padding-top: 20px;
+}
+
 /* //==== Application Custom CSS ====== */

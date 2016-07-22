@@ -25,7 +25,7 @@ class Recipient extends Model {
 
     public static function search($search_term) {
 
-        return parent::where('name', 'like', '%' . $search_term . '%')->orderBy('name', 'ASC')->get();
+        return parent::select('openpaymentsdata_reference_id', 'name', 'type')->distinct()->where('name', 'like', '%' . $search_term . '%')->orderBy('name', 'ASC')->get();
     }
 
 }

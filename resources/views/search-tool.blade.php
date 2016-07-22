@@ -17,7 +17,7 @@
     <div class="col-md-12">
         <form>
             <div class="form-group">
-                <label for="search-term">Search by physician or hospital name:</label>
+                <label for="search-term">Search by physician or health care company name:</label>
                 <div class="input-group">
                     <input type="text" class="form-control" autocomplete="off" name="txt-search-term" id="txt-search-term" placeholder="Ex.: 'Mount Sinai' or 'John Smith'">
                     <span class="input-group-btn">
@@ -43,17 +43,6 @@
 
             <!-- List group -->
             <div class="list-group" id="search_results">
-                <div href="#" class="list-group-item" >
-                    <i class="fa fa-hospital-o fa-2x" aria-hidden="true"></i>
-                    <span class="recipient_name">Bruno Couras</span>
-                    <button type="button" class="btn btn-info btn-xs pull-right">
-                        Transactions
-                    </button>
-                    <div class="recipient-transactions">
-                        <br/>
-                        @include("transactions")
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -64,7 +53,7 @@
     <div href="#" class="list-group-item" >
         <i class="fa fa-2x" aria-hidden="true"></i>
         <span class="recipient_name">Bruno Couras</span>
-        <button type="button" class="btn btn-info btn-xs pull-right">
+        <button type="button" class="btn btn-info btn-xs pull-right" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Loading">
             Transactions
         </button>
         <div class="recipient-transactions"></div>
@@ -78,5 +67,6 @@
 <script src="{{ URL::asset('assets/js/vendor/bootstrap-typeahead.min.js') }}"></script>
 <script src="{{ URL::asset('assets/js/vendor/jquery.dataTables.min.js') }}"></script>
 <script src="{{ URL::asset('assets/js/vendor/dataTables.bootstrap.min.js') }}"></script>
+<script src="{{ URL::asset('assets/js/vendor/canvasjs.min.js') }}"></script>
 <script src="{{ URL::asset('assets/js/search-tool.js') }}"></script>
 @endsection

@@ -111,7 +111,9 @@
                     </tbody>
                 </table>
             </div>
-            <div class="tab-pane fade" id="tab_charts">Default 2</div>
+            <div class="tab-pane fade" id="tab_charts">
+                <div id="chartContainer" style="height: 400px; width: 100%;"></div>
+            </div>
         </div>
     </div>
 </div>

@@ -15,5 +15,9 @@ class ViewsController extends Controller {
 
         return view("search-tool");
     }
+    
+    public function transactions(){
+        return view("transactions");
+    }
 
 }

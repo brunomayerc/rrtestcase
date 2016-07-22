@@ -10,6 +10,7 @@
 
 Route::any('/', "ViewsController@index")->name('home');
 Route::any('/search', "ViewsController@search")->name('search');
+Route::any('/transactions', "ViewsController@transactions")->name('transactions');
 
 /* //=================== View Routes ===================== */
 
