@@ -20,7 +20,13 @@ $(document).ready(function () {
 
 });
 
-// Function that performs the search
+/**
+ * @summary 
+ * 
+ * Function that connects to the RESTful api and performs the search in the local db.
+ *
+ * @return void this function does not return any data.
+ */
 function performSearch(searchTerm) {
 
     $.ajax({
@@ -83,6 +89,7 @@ function performSearch(searchTerm) {
     });
 }
 
+
 function viewTransactions(recipient_id, type) {
 
     // Pointer to the recipient row
@@ -120,7 +127,7 @@ function viewTransactions(recipient_id, type) {
             recipient_row.find("table").DataTable();
 
             // Renders the chart
-            renderChart(recipient_id, type);
+            renderChart(recipient_id);
 
             // Resets the transaction button to its normal state
             recipient_row.find("button").button('reset');
@@ -133,7 +140,14 @@ function viewTransactions(recipient_id, type) {
 
 }
 
-function renderChart(recipient_id, recipient_type) {
+/**
+ * @summary 
+ * 
+ * Function that renders the Breakdown Chart for a recipient.
+ *
+ * @param int recipient_id The unique identifier of the Recipient
+ */
+function renderChart(recipient_id) {
 
     // Formats the chart data before rendering the chart
     var chartData = JSON.parse($("#charts_data_" + recipient_id).val());
@@ -146,6 +160,7 @@ function renderChart(recipient_id, recipient_type) {
         });
     }
 
+    // Renders the chart
     var chart = new CanvasJS.Chart("chart_container_" + recipient_id,
             {
                 theme: "theme2",

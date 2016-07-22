@@ -12,7 +12,7 @@ $(document).ready(function () {
 /**
  * @summary 
  * 
- * Function that connects to the RESTful api and starts the import data.
+ * Function that connects to the RESTful api and imports the data.
  *
  * @access public
  * @return void this function does not return any data.

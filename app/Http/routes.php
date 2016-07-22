@@ -1,10 +1,10 @@
 <?php
 
 /*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-*/
+  |--------------------------------------------------------------------------
+  | Application Routes
+  |--------------------------------------------------------------------------
+ */
 
 /* ===================== View Routes ===================== */
 
@@ -15,8 +15,9 @@ Route::any('/transactions', "ViewsController@transactions")->name('transactions'
 /* //=================== View Routes ===================== */
 
 /* ===================== API Routes ====================== */
-Route::any('/api/import', "Api\ImportToolController@index")->name("api-import");
 
+Route::any('/api/import', "Api\ImportToolController@index")->name("api-import");
 Route::any('/api/search', "Api\SearchController@search")->name("api-search");
 Route::any('/api/search/typeahead', "Api\SearchController@typeahead")->name("api-typeahead");
+
 /* //=================== API Routes ===================== */

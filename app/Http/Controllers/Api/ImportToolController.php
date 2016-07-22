@@ -14,8 +14,9 @@ use App\Models\Recipient;
 class ImportToolController extends Controller {
 
     /**
-     * Default handler for route.
-     * Performs the import
+     * Default handler for the view import data tool.
+     * 
+     * @return JSON success
      */
     public function index() {
 

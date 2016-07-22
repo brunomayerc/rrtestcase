@@ -7,28 +7,45 @@ use App\Helpers\OpenPaymentsData;
 
 class ViewsController extends Controller {
 
+    /**
+     * Route for index page.
+     *     
+      \     * @return Laravel View.
+     */
     public function index() {
 
         return view("index");
     }
 
+    /**
+     * Route for the search tool page.
+     *     
+     * @return Laravel View.
+     */
     public function search() {
 
         return view("search-tool");
     }
 
+    /**
+     * Route for the transactions view that is loaded by the search tool view.
+     *     
+     * @param  int    $recipient_id   The unique id of the recipient to which load the transactions for.
+     * @param  string $recipient_type The type of the recipient to which load the transactions for (see App\Models\Recipient). 
+     * @return Laravel View.
+     */
     public function transactions() {
 
-        // Retrieves the recipient id
+        // Retrieves the recipient id from the POST
         $recipient_id = \Request::input("recipient_id", "");
 
-        // Retrieves the recipient type
+        // Retrieves the recipient type from the POST
         $recipient_type = \Request::input("recipient_type", "");
 
-        // Connects to the open payments seerver and retrieves the latest transactions
+        // Uses the OpenPaymentsData helper to retrieve the latest transactions based on the criteria
         $transactions = OpenPaymentsData::retrieveTransactions($recipient_type, $recipient_id);
 
-        // Prepares the chart info
+        // Prepares the data that will be used to render the BREAKDOWN CHART in this view
         $chartData = array();
         foreach ($transactions as $transaction) {
 
